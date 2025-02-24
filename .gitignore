@@ -1,0 +1,39 @@
+# === Fichiers Terraform ===
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# === Fichiers AWS Secrets et Credentials ===
+.aws/
+.env
+*.pem
+*.key
+
+# === Docker ===
+*.dockerignore
+**/Dockerfile
+**/.docker/
+
+# === Node.js & Python (Si microservices en Node/Python) ===
+node_modules/
+package-lock.json
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# === Kubernetes & Helm ===
+*.kube/
+*.helm/
+
+# === CI/CD & Logs ===
+.github/workflows/.*
+logs/
+*.log
+coverage/
+
+# === IDE & Systèmes d’exploitation ===
+.vscode/
+.idea/
+.DS_Store

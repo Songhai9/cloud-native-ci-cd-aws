@@ -1,13 +1,12 @@
-# 🔑 Gestion des Rôles IAM
+# 🔑 IAM Role Management
 
-## 📌 Principaux Rôles IAM
-| Rôle | Description |
-|------|------------|
-| **ECS Task Execution Role** | Permet aux tâches ECS d’accéder à AWS ECR et CloudWatch. |
-| **Load Balancer Role** | Autorise ALB à enregistrer les cibles et router le trafic. |
-| **Database Access Role** | Permet aux microservices de lire/écrire dans la BDD. |
+## 📌 Main IAM Roles
+| Role                       | Description                                                |
+|----------------------------|------------------------------------------------------------|
+| **ECS Task Execution Role**| Allows ECS tasks to access AWS ECR and CloudWatch.         |
+| **Load Balancer Role**     | Authorizes ALB to register targets and route traffic.      |
+| **Database Access Role**   | Allows microservices to read and write to the database.    |
 
-
-## 🚀 Vérification des rôles IAM
-`aws iam list-roles`
+## 🚀 Checking IAM Roles
+`aws iam list-roles`  
 `aws iam get-role --role-name ecsTaskExecutionRole`
