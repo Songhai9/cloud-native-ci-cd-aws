@@ -12,7 +12,6 @@
 
 # === Docker ===
 *.dockerignore
-**/Dockerfile
 **/.docker/
 
 # === Node.js & Python (Si microservices en Node/Python) ===

@@ -27,7 +27,11 @@ jobs:
     # 2. Log in to Amazon ECR
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1      
-
+    
+      - name: List files
+        run: |
+          ls -R
+          
     # 3. Build Docker image
       - name: Build Docker image
         run: |
