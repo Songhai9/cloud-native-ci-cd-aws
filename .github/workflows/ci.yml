@@ -13,7 +13,7 @@ jobs:
     steps:
       # 1. Check out the code
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 2. Set up Docker Buildx (for building Docker images)
       - name: Set up Docker Buildx
