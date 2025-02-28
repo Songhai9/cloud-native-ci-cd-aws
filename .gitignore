@@ -37,3 +37,5 @@ coverage/
 .idea/
 .DS_Store
 
+# images folder
+images/

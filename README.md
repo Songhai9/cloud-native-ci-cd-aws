@@ -6,7 +6,7 @@ The idea was for me to learn how to interact with the tools and have a personal 
 
 ## 🏗 **Architecture Overview**
 
-![Architecture Diagram](image-6.png)
+![Architecture Diagram](images/images/image-6.png)
 
 ### **Key Components**
 - **VPC & Subnets**: Isolated private and public subnets.
@@ -16,10 +16,10 @@ The idea was for me to learn how to interact with the tools and have a personal 
 - **CloudWatch**: Logs, metrics, and alarms for monitoring.
 - **GitHub Actions**: CI/CD pipelines for automated deployment.
 
-![Service lists](image.png)
+![Service lists](images/image.png)
 
 Here's an example of the state of api-service at a given time
-![api-service state](image-1.png)
+![api-service state](images/images/image-1.png)
 ---
 
 ## 🚀 **Getting Started**
@@ -76,7 +76,7 @@ To trigger a deployment:
 git push origin main
 ```
 
-![Workflow](image-5.png)
+![Workflow](images/image-5.png)
 
 ---
 
@@ -98,13 +98,13 @@ k6 run --vus 50 --duration 2m script_test.js
 ```
 
 Here's a **graph** showing the CPU/memory usage. 
-![Cloudwatch logs](image-2.png)
+![Cloudwatch logs](images/image-2.png)
 
 Here's also the **alarms** I get when conditions are met in a certain situation, such as when the usage of the **CPU usgae exceeds a given percentage**.
-![Alarms](image-3.png)
+![Alarms](images/image-3.png)
 
 **AWS Cloudwatch Dashboard**
-![Dashboard](image-4.png)
+![Dashboard](images/image-4.png)
 
 ---
 
