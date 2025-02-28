@@ -12,27 +12,35 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 1. Log in to Amazon ECR
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
+    # 1. Configure AWS Credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      # 2. Build Docker image
+    # 2. Log in to Amazon ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1      
+
+    # 3. Build Docker image
       - name: Build Docker image
         run: |
           cd 03_Application/service-api
           docker build -t service-api:latest .
 
-      # 3. Tag Docker image
+    # 4. Tag Docker image
       - name: Tag Docker image
         run: |
           docker tag service-api:latest ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_DEFAULT_REGION }}.amazonaws.com/service-api:latest
 
-      # 4. Push Docker image to ECR
+    # 5. Push Docker image to ECR
       - name: Push Docker image
         run: |
           docker push ${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_DEFAULT_REGION }}.amazonaws.com/service-api:latest
 
-      # 5. Update ECS service (API)
+    # 6. Update ECS service (API)
       - name: Update ECS Service
         run: |
           aws ecs update-service \
