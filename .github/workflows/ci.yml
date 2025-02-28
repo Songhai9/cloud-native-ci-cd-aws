@@ -19,11 +19,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # 3. Log in to Amazon ECR (optional if you want to scan the image before pushing it)
+      # 3. Log in to Amazon ECR
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 4. Build Docker image (example: service-api)
+      # 4. Build Docker image
       - name: Build Docker image
         run: |
           cd 03_Application/service-api
@@ -32,22 +32,24 @@ jobs:
       # 5. Unit tests (Python example)
       - name: Run tests
         run: |
-          # place your unit tests here, e.g.:
           cd 03_Application/service-api
-          pytest --maxfail=1 --disable-warnings -q  # if you have test suite
-          # or "python -m unittest" etc.
+          pytest --maxfail=1 --disable-warnings -q
 
-      # 6. Scan image for vulnerabilities (e.g. Trivy)
+      # 6. Scan image for vulnerabilities
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: service-api:latest
-          exit-code: "0"  # or "1" to fail the job if vulnerabilities found
+          exit-code: "0" 
           format: 'table'
 
-      # 7. Upload artifact (optional): logs, coverage, etc.
+      # 7. Upload artifact : logs, coverage, etc.
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: ./test-reports
+env:
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+  AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
