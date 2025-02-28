@@ -18,8 +18,8 @@ The architecture is based on:
 ## 🚀 Infrastructure Deployment
 The infrastructure has been created using Terraform. To deploy it:
 
-```sh
-cd 02_Infrastructure/
-terraform init
-terraform apply -auto-approve
-```
+
+`cd 02_Infrastructure/`
+`terraform init`
+`terraform apply -auto-approve`
+
