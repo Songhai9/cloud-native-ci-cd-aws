@@ -15,10 +15,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Set up Docker Buildx (for building Docker images)
+      # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # 3. Configure AWS Credentials
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -26,34 +27,36 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      # 3. Log in to Amazon ECR
+      # 4. Log in to Amazon ECR
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 4. Build Docker image
+      # 5. Build Docker image
       - name: Build Docker image
         run: |
           cd Application/service-api
           docker build -t service-api:latest .
-      
-          - name: Set up Python
-          uses: actions/setup-python@v4
-          with:
-            python-version: "3.9"  # or whichever version you need
-        
+
+      # 6. Set up Python on the runner
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      # 7. Install dependencies (on the runner)
       - name: Install dependencies
         run: |
           cd Application/service-api
           pip install -r requirements.txt
           pip install pytest
-          
-      # 5. Unit tests (Python example)
+
+      # 8. Run tests
       - name: Run tests
         run: |
           cd Application/service-api
           pytest --maxfail=1 --disable-warnings -q
 
-      # 6. Scan image for vulnerabilities
+      # 9. Scan image for vulnerabilities
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@master
         with:
@@ -61,12 +64,13 @@ jobs:
           exit-code: "0"
           format: "table"
 
-      # 7. Upload artifact : logs, coverage, etc.
+      # 10. Upload artifacts (logs, coverage, etc.)
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: ./test-reports
+
 env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
