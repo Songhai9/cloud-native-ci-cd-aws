@@ -6,7 +6,7 @@ The idea was for me to learn how to interact with the tools and have a personal 
 
 ## 🏗 **Architecture Overview**
 
-![Architecture Diagram](images/images/image-6.png)
+![Architecture Diagram](images/image-6.png)
 
 ### **Key Components**
 - **VPC & Subnets**: Isolated private and public subnets.
@@ -19,7 +19,7 @@ The idea was for me to learn how to interact with the tools and have a personal 
 ![Service lists](images/image.png)
 
 Here's an example of the state of api-service at a given time
-![api-service state](images/images/image-1.png)
+![api-service state](images/image-1.png)
 ---
 
 ## 🚀 **Getting Started**
