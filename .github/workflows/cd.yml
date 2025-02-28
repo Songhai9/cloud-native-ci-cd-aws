@@ -7,6 +7,10 @@ on:
 jobs:
   deploy-to-ecs:
     runs-on: ubuntu-latest
+    env:
+        AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
 
     steps:
       - name: Checkout repo
@@ -27,7 +31,7 @@ jobs:
     # 3. Build Docker image
       - name: Build Docker image
         run: |
-          cd 03_Application/service-api
+          cd Application/service-api
           docker build -t service-api:latest .
 
     # 4. Tag Docker image
@@ -54,7 +58,3 @@ jobs:
             --cluster cloud-native-cluster \
             --service worker-service \
             --force-new-deployment
-env:
-  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-  AWS_REGION: ${{ secrets.AWS_DEFAULT_REGION }}

@@ -26,13 +26,13 @@ jobs:
       # 4. Build Docker image
       - name: Build Docker image
         run: |
-          cd 03_Application/service-api
+          cd Application/service-api
           docker build -t service-api:latest .
 
       # 5. Unit tests (Python example)
       - name: Run tests
         run: |
-          cd 03_Application/service-api
+          cd Application/service-api
           pytest --maxfail=1 --disable-warnings -q
 
       # 6. Scan image for vulnerabilities
