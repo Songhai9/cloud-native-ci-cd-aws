@@ -1,8 +1,8 @@
-# 🔹 Security Group pour l'ALB (Load Balancer)
+# 🔹 Security Group for ALB (Load Balancer)
 resource "aws_security_group" "alb_sg" {
   vpc_id = aws_vpc.main.id
 
-  # Autoriser l'accès HTTP et HTTPS depuis Internet
+  # Allow HTTP and HTTPS access from Internet
   ingress {
     from_port   = 80
     to_port     = 80
@@ -17,7 +17,7 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Autoriser le trafic sortant
+  # Allow outbound traffic
   egress {
     from_port   = 0
     to_port     = 0
@@ -30,11 +30,11 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-# 🔹 Security Group pour les microservices
+# 🔹 Security Group for microservices
 resource "aws_security_group" "ecs_sg" {
   vpc_id = aws_vpc.main.id
 
-  # Autoriser le trafic seulement depuis l'ALB
+  # Allow traffic only from ALB
   ingress {
     from_port       = 80
     to_port         = 80
@@ -49,7 +49,7 @@ resource "aws_security_group" "ecs_sg" {
     security_groups = [aws_security_group.alb_sg.id]
   }
 
-  # Trafic sortant autorisé
+  # Allow outbound traffic
   egress {
     from_port   = 0
     to_port     = 0
@@ -62,11 +62,11 @@ resource "aws_security_group" "ecs_sg" {
   }
 }
 
-# 🔹 Security Group pour la base de données
+# 🔹 Security Group for database
 resource "aws_security_group" "rds_sg" {
   vpc_id = aws_vpc.main.id
 
-  # Autoriser uniquement les microservices à accéder à RDS
+  # Allow only microservices to access RDS
   ingress {
     from_port       = 5432
     to_port         = 5432

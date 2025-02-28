@@ -6,7 +6,7 @@ The idea was for me to learn how to interact with the tools and have a personal 
 
 ## 🏗 **Architecture Overview**
 
-![Architecture Diagram](Architecture/architecture-diagram.md)
+![Architecture Diagram](image-6.png)
 
 ### **Key Components**
 - **VPC & Subnets**: Isolated private and public subnets.
@@ -165,8 +165,5 @@ Here's also the **alarms** I get when conditions are met in a certain situation,
 └── README.md
 ```
 
----
 
-## 📢 **Contributions & Future Improvements**
-Feel free to open an issue or PR to improve the infrastructure or add new features!
 
