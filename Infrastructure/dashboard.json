@@ -1,0 +1,62 @@
+{
+    "widgets": [
+      {
+        "type": "metric",
+        "width": 12,
+        "height": 6,
+        "properties": {
+          "metrics": [
+            [
+              "AWS/ECS",
+              "CPUUtilization",
+              "ClusterName",
+              "${cluster_name}",
+              "ServiceName",
+              "${api_service_name}"
+            ],
+            [
+              ".",
+              "CPUUtilization",
+              "ClusterName",
+              "${cluster_name}",
+              "ServiceName",
+              "${worker_service_name}"
+            ]
+          ],
+          "view": "timeSeries",
+          "stacked": false,
+          "region": "us-east-1",
+          "title": "CPU Utilization (API & Worker)"
+        }
+      },
+      {
+        "type": "metric",
+        "width": 12,
+        "height": 6,
+        "properties": {
+          "metrics": [
+            [
+              "AWS/ECS",
+              "MemoryUtilization",
+              "ClusterName",
+              "${cluster_name}",
+              "ServiceName",
+              "${api_service_name}"
+            ],
+            [
+              ".",
+              "MemoryUtilization",
+              "ClusterName",
+              "${cluster_name}",
+              "ServiceName",
+              "${worker_service_name}"
+            ]
+          ],
+          "view": "timeSeries",
+          "stacked": false,
+          "region": "us-east-1",
+          "title": "Memory Utilization (API & Worker)"
+        }
+      }
+    ]
+  }
