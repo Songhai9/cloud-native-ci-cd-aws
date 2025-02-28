@@ -29,9 +29,9 @@ jobs:
 
       # 4. Log in to Amazon ECR
       - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1 
+        uses: aws-actions/amazon-ecr-login@v1
 
-      # 5. Build Docker image
+      # 5. Build Docker image (optional in CI)
       - name: Build Docker image
         run: |
           cd Application/service-api
@@ -47,19 +47,15 @@ jobs:
       - name: Install dependencies
         run: |
           cd Application/service-api
-          pip install -r requirements.txt
-          pip install pytest
-
-      - name: Install dependencies
-        run: |
-          cd Application/service-api
-          pip install --no-cache-dir -r requirements.txt
-          pip install pytest 
+          # Use "python -m pip" to ensure we use the same Python as "python"
+          python -m pip install --no-cache-dir -r requirements.txt
+          python -m pip install pytest
 
       # 8. Run tests
       - name: Run tests
         run: |
           cd Application/service-api
+          # Again, be sure to call "python" or "pytest"
           pytest --maxfail=1 --disable-warnings -q
 
       # 9. Scan image for vulnerabilities
@@ -70,7 +66,7 @@ jobs:
           exit-code: "0"
           format: "table"
 
-      # 10. Upload artifacts (logs, coverage, etc.)
+      # 10. Upload artifacts
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
