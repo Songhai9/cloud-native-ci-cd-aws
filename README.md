@@ -100,7 +100,7 @@ k6 run --vus 50 --duration 2m script_test.js
 Here's a **graph** showing the CPU/memory usage. 
 ![Cloudwatch logs](image-2.png)
 
-Here's also the **alarms** I get when conditions are met in a certain situation, such as when the usage of the** CPU usgae exceeds a given percentage**.
+Here's also the **alarms** I get when conditions are met in a certain situation, such as when the usage of the **CPU usgae exceeds a given percentage**.
 ![Alarms](image-3.png)
 
 **AWS Cloudwatch Dashboard**
