@@ -35,7 +35,18 @@ jobs:
         run: |
           cd Application/service-api
           docker build -t service-api:latest .
-
+      
+          - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+            python-version: "3.9"  # or whichever version you need
+        
+      - name: Install dependencies
+        run: |
+          cd Application/service-api
+          pip install -r requirements.txt
+          pip install pytest
+          
       # 5. Unit tests (Python example)
       - name: Run tests
         run: |
