@@ -15,11 +15,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Set up Docker Buildx
+      # 2. Set up Docker Buildx (if you need to build Docker images)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # 3. Configure AWS Credentials
+      # 3. Configure AWS Credentials (if pushing to ECR)
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -27,38 +27,36 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
-      # 4. Log in to Amazon ECR
+      # 4. Log in to Amazon ECR (if you want to push images from CI)
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
-      # 5. Build Docker image (optional in CI)
+      # 5. Build Docker image
       - name: Build Docker image
         run: |
           cd Application/service-api
           docker build -t service-api:latest .
 
-      # 6. Set up Python on the runner
+      # 6. Set up Python 3.9 on the runner
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
-      # 7. Install dependencies (on the runner)
+      # 7. Install dependencies on the runner
       - name: Install dependencies
         run: |
           cd Application/service-api
-          # Use "python -m pip" to ensure we use the same Python as "python"
           python -m pip install --no-cache-dir -r requirements.txt
           python -m pip install pytest
 
-      # 8. Run tests
+      # 8. Run tests (in the host environment)
       - name: Run tests
         run: |
           cd Application/service-api
-          # Again, be sure to call "python" or "pytest"
-          pytest --maxfail=1 --disable-warnings -q
+          python -m pytest --maxfail=1 --disable-warnings -q
 
-      # 9. Scan image for vulnerabilities
+      # 9. Scan Docker image with Trivy
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@master
         with:
