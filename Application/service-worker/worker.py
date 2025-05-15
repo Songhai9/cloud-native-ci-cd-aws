@@ -3,7 +3,6 @@ import time
 def main():
     print("Worker started. Press Ctrl+C to stop.")
     while True:
-        # Simuler un traitement
         print("Worker is doing some background task...")
         time.sleep(5)
 
