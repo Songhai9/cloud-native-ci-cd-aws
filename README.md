@@ -6,7 +6,7 @@ The idea was for me to learn how to interact with the tools and have a personal 
 
 ## 🏗 **Architecture Overview**
 
-![Architecture Diagram](images/image-6.png)
+![Architecture Diagram](https://imgur.com/Ktd6Y4s.png)
 
 ### **Key Components**
 - **VPC & Subnets**: Isolated private and public subnets.
